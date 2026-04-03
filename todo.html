@@ -1,5 +1,4 @@
-[02/04/2026 21:52] Nouuuur: هنا todo.html كامل 👇
-<!DOCTYPE html>
+[03/04/2026 13:56] Nouuuur: <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,7 +53,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Input Area */
         .input-area {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -118,7 +116,6 @@
             transform: scale(1.02);
         }
 
-        /* Stats */
         .stats {
             display: flex;
             justify-content: space-around;
@@ -143,7 +140,6 @@
             color: #ccc;
         }
 
-        /* Tasks */
         .task-list {
             display: flex;
             flex-direction: column;
@@ -166,12 +162,12 @@
             from { opacity: 0; transform: translateX(-20px); }
             to { opacity: 1; transform: translateX(0); }
         }
-[02/04/2026 21:52] Nouuuur: .task-item.done .task-text {
+
+        .task-item.done .task-text {
             text-decoration: line-through;
             opacity: 0.5;
         }
-
-        .task-checkbox {
+[03/04/2026 13:56] Nouuuur: .task-checkbox {
             width: 22px;
             height: 22px;
             cursor: pointer;
@@ -205,7 +201,6 @@
             padding: 30px;
         }
 
-        /* Clear All */
         .clear-btn {
             width: 100%;
             margin-top: 20px;
@@ -229,21 +224,19 @@
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
+        <a href="project.html">Projects</a>
         <a href="contact.html">Contact</a>
     </nav>
 
     <div class="container">
         <h1>✨ My To-Do List</h1>
 
-        <!-- Input -->
         <div class="input-area">
             <input type="text" id="taskInput" placeholder="Add a new task..." />
             <div class="color-picker" id="colorPicker"></div>
             <button class="add-btn" onclick="addTask()">➕ Add Task</button>
         </div>
 
-        <!-- Stats -->
         <div class="stats">
             <div class="stat-box">
                 <span id="totalCount">0</span>
@@ -259,10 +252,9 @@
             </div>
         </div>
 
-        <!-- Tasks -->
         <div class="task-list" id="taskList"></div>
 
-        <button class="clear-btn" onclick="clearAll()">🗑️ Clear All Tasks</button>
+        <button class="clear-btn" onclick="clearAll()">🗑 Clear All Tasks</button>
     </div>
 
     <script>
@@ -270,7 +262,6 @@
         let selectedColor = colors[0];
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-        // Build color picker
         const picker = document.getElementById('colorPicker');
         colors.forEach(color => {
             const btn = document.createElement('div');
@@ -298,7 +289,8 @@
         function renderTasks() {
             const list = document.getElementById('taskList');
             list.innerHTML = '';
-[02/04/2026 21:52] Nouuuur: if (tasks.length === 0) {
+
+            if (tasks.length === 0) {
                 list.innerHTML = '<p class="empty-msg">No tasks yet! Add one above 🎯</p>';
                 updateStats();
                 return;
@@ -307,13 +299,13 @@
             tasks.forEach((task, index) => {
                 const item = document.createElement('div');
                 item.className = 'task-item' + (task.done ? ' done' : '');
-                item.style.borderLeftColor = task.color;
-
-                item.innerHTML = 
+                item.
+[03/04/2026 13:56] Nouuuur: style.borderLeftColor = task.color;
+                item.innerHTML = `
                     <input type="checkbox" class="task-checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask(${index})">
                     <span class="task-text">${task.text}</span>
-                    <button class="delete-btn" onclick="deleteTask(${index})">🗑️</button>
-                ;
+                    <button class="delete-btn" onclick="deleteTask(${index})">🗑</button>
+                `;
                 list.appendChild(item);
             });
 
@@ -324,7 +316,6 @@
             const input = document.getElementById('taskInput');
             const text = input.value.trim();
             if (!text) return;
-
             tasks.push({ text, color: selectedColor, done: false });
             input.value = '';
             saveTasks();
@@ -352,8 +343,7 @@
             }
         }
 
-        // Add on Enter key
-        document.getElementById('taskInput').addEventListener('keypress', e => {
+        document.getElementById('taskInput').addEventListener('keydown', e => {
             if (e.key === 'Enter') addTask();
         });
 
