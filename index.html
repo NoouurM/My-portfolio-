@@ -1,88 +1,328 @@
-[03/04/2026 14:50] Nouuuur: <!DOCTYPE html>
+[03/04/2026 18:08] Nouuuur: <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>To-Do List App</title>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #0a0f1e; color: white; min-height: 100vh; }
-        nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 22px; font-weight: bold; background: linear-gradient(to right, #ff69b4, #cc0066); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links a { color: white; text-decoration: none; margin-left: 25px; font-size: 16px; transition: 0.3s; }
-        .nav-links a:hover { color: #ff69b4; }
-        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh; text-align: center; padding: 40px 20px; background: radial-gradient(ellipse at center, #1a0010 0%, #0a0f1e 70%); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,105,180,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
-        .hero-badge { background: rgba(255,105,180,0.15); border: 1px solid rgba(255,105,180,0.3); color: #ff69b4; padding: 6px 18px; border-radius: 20px; font-size: 13px; margin-bottom: 20px; letter-spacing: 2px; }
-        .hero h1 { font-size: 52px; line-height: 1.2; margin-bottom: 20px; background: linear-gradient(to right, #ffffff, #ff69b4, #cc0066); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 18px; color: #aaa; max-width: 500px; line-height: 1.7; margin-bottom: 35px; }
-        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
-        .btn-primary { 
-            padding: 14px 30px; 
-            background: linear-gradient(to right, #ff69b4, #cc0066); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: bold; 
-            font-size: 15px; 
-            transition: all 0.3s ease;
-            display: inline-block;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .btn-primary:hover { 
-            opacity: 0.85; 
-            transform: translateY(-5px) scale(1.05); 
-            box-shadow: 0 15px 30px rgba(255,105,180,0.5); 
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            color: white;
         }
-        .btn-primary:active {
-            transform: translateY(0) scale(0.98);
+
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
         }
-        .stats { display: flex; justify-content: center; gap: 40px; padding: 40px 20px; background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; }
-        .stat { text-align: center; }
-        .stat span { display: block; font-size: 32px; font-weight: bold; color: #ff69b4; }
-        .stat p { font-size: 13px; color: #666; margin-top: 4px; }
-        .skills-section { padding: 60px 20px; text-align: center; }
-        .skills-section h2 { font-size: 26px; margin-bottom: 30px; color: #ff69b4; }
-        .skills-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; max-width: 600px; margin: 0 auto; }
-        .skill-tag { background: rgba(255,105,180,0.1); border: 1px solid rgba(255,105,180,0.2); color: #ff69b4; padding: 10px 20px; border-radius: 20px; font-size: 14px; transition: 0.3s; }
-        .skill-tag:hover { background: rgba(255,105,180,0.2); transform: translateY(-2px); }
-        footer { text-align: center; padding: 25px; color: #333; font-size: 13px; border-top: 1px solid #111; }
-        @media (max-width: 600px) { .hero h1 { font-size: 32px; } .nav-links a { margin-left: 12px; font-size: 14px; } }
-[03/04/2026 14:50] Nouuuur: </style>
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #f0c0ff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Todo App */
+
+        .input-area {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-area input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 15px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .input-area input::placeholder {
+            color: #ccc;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .color-btn.selected {
+            border-color: white;
+            transform: scale(1.2);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #ff6b6b, #ff9ff3);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stat-box p {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border-left: 5px solid #fff;
+        }
+
+        .task-item.done .task-text {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .task-checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .task-text {
+            flex: 1;
+        }
+
+        .delete-btn {
+            background: rgba(255, 107, 107, 0.3);
+            border: none;
+            color: #ff6b6b;
+            padding: 6px 12px;
+            border-radius: 8px;
+[03/04/2026 18:08] Nouuuur: cursor: pointer;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: #aaa;
+            padding: 30px;
+        }
+
+        .clear-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255,107,107,0.2);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
+
 <body>
-    <nav>
-        <div class="logo">Nour.dev</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="project.html">Projects</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-    <div class="hero">
-        <div class="hero-badge">✦ WELCOME TO MY PORTFOLIO ✦</div>
-        <h1>Hi, I'm Nour 👋<br>Web Developer</h1>
-        <p>I build beautiful and interactive websites using HTML, CSS, and JavaScript. Let's create something amazing together!</p>
-        <div class="hero-buttons">
-            <a href="project.html" class="btn-primary">🚀 View My Projects</a>
-            <a href="contact.html" class="btn-primary">📩 Contact Me</a>
-            <a href="todo.html" class="btn-primary">📝 Try To-Do App</a>
-        </div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="project.html">Projects</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="container">
+    <h1>✨ My To-Do List</h1>
+
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Add a new task..." />
+        <div class="color-picker" id="colorPicker"></div>
+        <button class="add-btn" onclick="addTask()">➕ Add Task</button>
     </div>
+
     <div class="stats">
-        <div class="stat"><span>3+</span><p>Projects</p></div>
-        <div class="stat"><span>3+</span><p>Technologies</p></div>
-        <div class="stat"><span>100%</span><p>Passion 🩷</p></div>
-    </div>
-    <div class="skills-section">
-        <h2>🛠 My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-tag">HTML5 🌐</div>
-            <div class="skill-tag">CSS3 🎨</div>
-            <div class="skill-tag">JavaScript ⚡️</div>
-            <div class="skill-tag">Responsive Design 📱</div>
-            <div class="skill-tag">UI/UX 🩷</div>
+        <div class="stat-box">
+            <span id="totalCount">0</span>
+            <p>Total</p>
+        </div>
+        <div class="stat-box">
+            <span id="doneCount">0</span>
+            <p>Done ✅</p>
+        </div>
+        <div class="stat-box">
+            <span id="leftCount">0</span>
+            <p>Remaining</p>
         </div>
     </div>
-    <footer>Made with 🩷 by Nour</footer>
+
+    <div class="task-list" id="taskList"></div>
+
+    <button class="clear-btn" onclick="clearAll()">🗑 Clear All Tasks</button>
+</div>
+
+<script>
+const colors = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#54a0ff','#5f27cd','#00d2d3','#1dd1a1'];
+let selectedColor = colors[0];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+const picker = document.getElementById('colorPicker');
+
+colors.forEach(color => {
+    const btn = document.createElement('div');
+    btn.className = 'color-btn';
+    btn.style.background = color;
+    btn.onclick = () => {
+        selectedColor = color;
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    };
+    picker.appendChild(btn);
+});
+
+function saveTasks(){
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function updateStats(){
+    const done = tasks.filter(t => t.done).length;
+    totalCount.textContent = tasks.length;
+    doneCount.textContent = done;
+    leftCount.textContent = tasks.length - done;
+}
+
+function renderTasks(){
+    const list = document.getElementById('taskList');
+    list.innerHTML = '';
+
+    if(tasks.length === 0){
+        list.innerHTML = '<p class="empty-msg">No tasks yet 🎯</p>';
+        updateStats();
+        return;
+    }
+
+    tasks.forEach((task,index)=>{
+        const item = document.createElement('div');
+        item.className = 'task-item' + (task.done ? ' done':'');
+        item.style.borderLeftColor = task.color;
+
+        item.innerHTML = `
+        <input type="checkbox" ${task.done?'checked':''} onchange="toggleTask(${index})">
+        <span class="task-text">${task.text}</span>
+        <button onclick="deleteTask(${index})">🗑</button>
+        `;
+
+        list.appendChild(item);
+    });
+
+    updateStats();
+}
+
+function addTask(){
+    const input = document.getElementById('taskInput');
+    if(!input.value.trim()) return;
+
+    tasks.push({text:input.value,color:selectedColor,done:false});
+    input.value='';
+    saveTasks();
+    renderTasks();
+}
+
+function toggleTask(i){
+    tasks[i].done=!tasks[i].done;
+    saveTasks();
+    renderTasks();
+}
+
+function deleteTask(i){
+    tasks.splice(i,1);
+    saveTasks();
+    renderTasks();
+}
+
+function clearAll(){
+    if(confirm('Delete all?')){
+        tasks=[];
+        saveTasks();
+        renderTasks();
+    }
+}
+
+renderTasks();
+</script>
+
 </body>
 </html>
